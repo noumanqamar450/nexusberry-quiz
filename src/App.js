@@ -2,8 +2,9 @@ import './App.css';
 import Data from './Data'
 import { Button, Card, Row, Col, Badge, ListGroup, ProgressBar } from 'react-bootstrap';
 import { useState } from 'react';
-import { getResult } from './lib'
+import { getResult, getResultWithCSV } from './lib'
 import Loader from './Loader';
+import csvDownload from 'json-to-csv-export'
 
 let quiz;
 const quizShuffle = () => {
@@ -47,7 +48,7 @@ function App() {
                           } else { 
                             setIndex(index + 1)
                           } 
-                          await setQuizResult([...quizResult, getResult(op, quiz[index].ans, quiz[index].image)])
+                          await setQuizResult([...quizResult, getResult(op, quiz[index].ans, quiz[index].image, quiz[index].question)])
                           setProgress((100 / (quizLength + 1)) * (index + 1))
                         }}>
                         <Badge bg="primary" className='float-start mt-1'>
@@ -87,6 +88,9 @@ function App() {
                   ))
                 }
                 </ListGroup>
+                <Button className="float-end" onClick={() => csvDownload(getResultWithCSV(quizResult))}>
+                  Download Result
+                </Button>
               </Card.Body>
             </Card>
           )}
