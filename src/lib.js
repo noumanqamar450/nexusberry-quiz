@@ -20,7 +20,7 @@ export const getResultWithCSV = (data) => {
         data: data,
         filename: `quiz_result_report_${date}`,
         delimiter: ',',
-        headers: ['Question', "Images", "Your Selected Option", "Correct Option"]
+        headers: ['Question', "Images", "Your Selected Option", "Correct Option", "Status"]
     }
     return dataToConvert;
 }
