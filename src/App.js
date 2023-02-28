@@ -82,8 +82,8 @@ function App() {
               </Card.Header>
               <Card.Body>
                 <ProgressBar>
-                  <ProgressBar variant="primary" now={100 / correctAnswer} key={1}/>
-                  <ProgressBar variant="success" now={100 / wrongAnswer} key={2} />
+                  <ProgressBar variant="primary" now={(100 / quiz.length) * correctAnswer} key={1}/>
+                  <ProgressBar variant="success" now={(100 / quiz.length) * wrongAnswer} key={2} />
                 </ProgressBar>
                 <ListGroup variant="flush">
                   <ListGroup.Item><span></span> <strong>Selected</strong> <strong>Correct Answer</strong></ListGroup.Item>
