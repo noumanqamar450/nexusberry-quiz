@@ -1,11 +1,15 @@
 export const getResult = (option, ans, image, ques) => {
-    let selected = Object.values(option)[0]
-    let answer = Object.values(ans)[0]
+    let opt = Object.values(option)[0]
+    let an = Object.values(ans)[0]
+    let boolean;
+    boolean = opt === an ? true : false;
+
     let result = {
         question:ques,
         image,
-        selected,
-        answer,
+        selected: option,
+        answer: ans,
+        boolean
     }
     return result;
 }

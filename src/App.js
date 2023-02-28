@@ -80,17 +80,37 @@ function App() {
                 </Button>
               </Card.Header>
               <Card.Body>
+                <ProgressBar>
+                  <ProgressBar variant="primary" now={60} key={1}/>
+                  <ProgressBar variant="success" now={40} key={2} />
+                </ProgressBar>
                 <ListGroup variant="flush">
                   <ListGroup.Item><span></span> <strong>Selected</strong> <strong>Correct Answer</strong></ListGroup.Item>
                 {
                   quizResult.map((res, i)=>(
-                    <ListGroup.Item className='text-center' key={i}><img src={res.image} alt={res.answer} /> <span>{res.selected}</span> <span>{res.answer}</span></ListGroup.Item>
+                    <ListGroup.Item className='text-start' key={i}>
+                      <img src={res.image} alt={Object.values(res.answer)[0]} /> 
+                      <span><Badge bg={res.boolean ? 'primary' : 'success'}>{Object.keys(res.selected)[0]}</Badge> {Object.values(res.selected)[0]}</span> 
+                      <span><Badge bg={res.boolean ? 'primary' : 'success'}>{Object.keys(res.answer)[0]}</Badge> {Object.values(res.answer)[0]}</span>
+                    </ListGroup.Item>
                   ))
                 }
                 </ListGroup>
                 <Button className="float-end" onClick={() => csvDownload(getResultWithCSV(quizResult))}>
                   Download Result
                 </Button>
+                <div className='float-start'>
+                  <h6>
+                    Correct Answer <Badge bg="primary">{ 
+                      quizResult.filter(r => r.boolean === true).length
+                      }</Badge>
+                  </h6>
+                  <h6>
+                    Wrong Answer <Badge bg="success">{
+                      quizResult.filter(r => r.boolean === false).length
+                    }</Badge>
+                  </h6>
+                </div>
               </Card.Body>
             </Card>
           )}
