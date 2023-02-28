@@ -19,7 +19,8 @@ function App() {
   const [quizResult, setQuizResult] = useState([]);
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(false);
-  
+  const correctAnswer = quizResult.filter(r => r.boolean === true).length
+  const wrongAnswer = quizResult.filter(r => r.boolean === false).length
   return (
     <div>
       {
@@ -81,8 +82,8 @@ function App() {
               </Card.Header>
               <Card.Body>
                 <ProgressBar>
-                  <ProgressBar variant="primary" now={60} key={1}/>
-                  <ProgressBar variant="success" now={40} key={2} />
+                  <ProgressBar variant="primary" now={100 / correctAnswer} key={1}/>
+                  <ProgressBar variant="success" now={100 / wrongAnswer} key={2} />
                 </ProgressBar>
                 <ListGroup variant="flush">
                   <ListGroup.Item><span></span> <strong>Selected</strong> <strong>Correct Answer</strong></ListGroup.Item>
@@ -102,12 +103,12 @@ function App() {
                 <div className='float-start'>
                   <h6>
                     Correct Answer <Badge bg="primary">{ 
-                      quizResult.filter(r => r.boolean === true).length
+                      correctAnswer
                       }</Badge>
                   </h6>
                   <h6>
                     Wrong Answer <Badge bg="success">{
-                      quizResult.filter(r => r.boolean === false).length
+                      wrongAnswer
                     }</Badge>
                   </h6>
                 </div>
